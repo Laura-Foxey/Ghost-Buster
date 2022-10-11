@@ -47,7 +47,8 @@ namespace Ghost_Buster
             txtAmmo.Text = "Ammo: " + ammo;
             txtKills.Text = "Kills: " + kills;
 
-            if (goUp == true && player.Top > 0)
+            //change direction speed depending on the button pressed & limit to the size of window
+            if (goUp == true && player.Top > 40)
             {
                 player.Top -= speed;
             }

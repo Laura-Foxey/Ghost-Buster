@@ -42,9 +42,10 @@
             // 
             this.txtAmmo.AutoSize = true;
             this.txtAmmo.Font = new System.Drawing.Font("SimSun-ExtB", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAmmo.Location = new System.Drawing.Point(12, 9);
+            this.txtAmmo.Location = new System.Drawing.Point(16, 11);
+            this.txtAmmo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.txtAmmo.Name = "txtAmmo";
-            this.txtAmmo.Size = new System.Drawing.Size(86, 19);
+            this.txtAmmo.Size = new System.Drawing.Size(101, 24);
             this.txtAmmo.TabIndex = 0;
             this.txtAmmo.Text = "Ammo: 0";
             this.txtAmmo.Click += new System.EventHandler(this.label1_Click);
@@ -53,9 +54,10 @@
             // 
             this.txtKills.AutoSize = true;
             this.txtKills.Font = new System.Drawing.Font("SimSun-ExtB", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtKills.Location = new System.Drawing.Point(234, 9);
+            this.txtKills.Location = new System.Drawing.Point(312, 11);
+            this.txtKills.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.txtKills.Name = "txtKills";
-            this.txtKills.Size = new System.Drawing.Size(97, 19);
+            this.txtKills.Size = new System.Drawing.Size(114, 24);
             this.txtKills.TabIndex = 0;
             this.txtKills.Text = "Kills: 0";
             this.txtKills.Click += new System.EventHandler(this.label1_Click);
@@ -64,25 +66,28 @@
             // 
             this.txtHP.AutoSize = true;
             this.txtHP.Font = new System.Drawing.Font("SimSun-ExtB", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtHP.Location = new System.Drawing.Point(481, 9);
+            this.txtHP.Location = new System.Drawing.Point(641, 11);
+            this.txtHP.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.txtHP.Name = "txtHP";
-            this.txtHP.Size = new System.Drawing.Size(42, 19);
+            this.txtHP.Size = new System.Drawing.Size(49, 24);
             this.txtHP.TabIndex = 0;
             this.txtHP.Text = "HP:";
             this.txtHP.Click += new System.EventHandler(this.label1_Click);
             // 
             // HPBar
             // 
-            this.HPBar.Location = new System.Drawing.Point(529, 5);
+            this.HPBar.Location = new System.Drawing.Point(705, 6);
+            this.HPBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.HPBar.Name = "HPBar";
-            this.HPBar.Size = new System.Drawing.Size(177, 23);
+            this.HPBar.Size = new System.Drawing.Size(236, 28);
             this.HPBar.TabIndex = 1;
             this.HPBar.Value = 100;
             // 
             // player
             // 
             this.player.Image = global::Ghost_Buster.Properties.Resources.up;
-            this.player.Location = new System.Drawing.Point(287, 221);
+            this.player.Location = new System.Drawing.Point(328, 293);
+            this.player.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.player.Name = "player";
             this.player.Size = new System.Drawing.Size(71, 100);
             this.player.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -97,15 +102,16 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.ClientSize = new System.Drawing.Size(924, 661);
+            this.ClientSize = new System.Drawing.Size(1232, 814);
             this.Controls.Add(this.player);
             this.Controls.Add(this.HPBar);
             this.Controls.Add(this.txtHP);
             this.Controls.Add(this.txtKills);
             this.Controls.Add(this.txtAmmo);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "Ghost Buster";
             this.Load += new System.EventHandler(this.w);
