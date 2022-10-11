@@ -42,6 +42,8 @@ namespace Ghost_Buster
             else
             {
                 gameOver = true;
+                player.Image = Properties.Resources.dead;
+                gameTimer.Stop();
             }
 
             txtAmmo.Text = "Ammo: " + ammo;
@@ -64,6 +66,18 @@ namespace Ghost_Buster
             {
                 player.Left += speed;
             }
+
+            foreach (Control c in this.Controls)
+            {
+                if (c is PictureBox && (string)c.Tag == "ammo" )
+                {
+                    if (player.Bounds.IntersectsWith(c.Bounds))
+                    {
+                        ammo += 5;
+                        c.Dispose();
+                    }
+                }
+            }
         }
 
         private void KeyIsUp(object sender, KeyEventArgs e)
@@ -85,9 +99,14 @@ namespace Ghost_Buster
                 goRight = false;
             }
 
-            if (e.KeyCode == Keys.Space)
+            if (e.KeyCode == Keys.Space && ammo > 0)
             {
+                ammo--;
                 Shoot(facing);
+                if (ammo < 1)
+                {
+                    SpawnAmmo();
+                }
             }
         }
 
@@ -132,6 +151,34 @@ namespace Ghost_Buster
 
         private void SpawnEnemy()
         {
+            PictureBox ghost = new PictureBox();
+            ghost.Tag = "ghost";
+            ghost.Image = Properties.Resources.zdown;  //TODO: changethis
+            ghost.Left = random.Next(0, 900);
+            ghost.Top = random.Next(0, 800);
+            ghost.SizeMode = PictureBoxSizeMode.AutoSize;
+            enemyList.Add(ghost);
+
+            this.Controls.Add(ghost);
+
+            //makes sure the player img does not get overlapped 
+            player.BringToFront();
+        }
+
+        private void SpawnAmmo()
+        {
+            PictureBox ammo = new PictureBox();
+            ammo.Tag = "ammo";
+            ammo.Image = Properties.Resources.ammo_Image; //TODO: changethis
+            ammo.SizeMode = PictureBoxSizeMode.AutoSize;
+            ammo.Left = random.Next(10, ClientSize.Width - ammo.Width);
+            ammo.Top = random.Next(10, ClientSize.Height - ammo.Height);
+
+            this.Controls.Add(ammo);
+
+            //makes sure the ammo and player img does not get overlapped 
+            ammo.BringToFront();
+            player.BringToFront();
 
         }
 
