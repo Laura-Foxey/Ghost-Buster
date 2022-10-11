@@ -216,7 +216,7 @@ namespace Ghost_Buster
             }
             if (dir == "left")
             {
-                shoot.bulletLeft = player.Left + (player.Width / 2)
+                shoot.bulletLeft = player.Left + (player.Width / 2);
                 shoot.bulletTop = player.Top + (player.Height / 2) - 30;
             }
 
