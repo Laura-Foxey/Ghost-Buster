@@ -75,7 +75,6 @@ namespace Ghost_Buster
             if (e.KeyCode == Keys.Down)
             {
                 goDown = false;
-
             }
             if (e.KeyCode == Keys.Left)
             {
@@ -90,11 +89,6 @@ namespace Ghost_Buster
             {
                 Shoot(facing);
             }
-        }
-
-        private void w(object sender, EventArgs e)
-        {
-
         }
 
         private void KeyIsDown(object sender, KeyEventArgs e)
@@ -127,7 +121,13 @@ namespace Ghost_Buster
 
         private void Shoot(string dir)
         {
+            Bullet shoot = new Bullet();
+            shoot.dir = dir;
+            //bullet originates from the middle of the player
+            shoot.bulletLeft = player.Left + (player.Width / 2);
+            shoot.bulletTop = player.Top + (player.Height / 2);
 
+            shoot.CreateBullet(this);
         }
 
         private void SpawnEnemy()

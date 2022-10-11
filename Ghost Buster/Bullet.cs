@@ -20,7 +20,7 @@ namespace Ghost_Buster
         public void CreateBullet(Form arg)
         {
             bullet.BackColor = Color.White;
-            bullet.Size = new Size(5, 5);
+            bullet.Size = new Size(SetBulletSize()[0], SetBulletSize()[1]);
             bullet.Tag = "bullet";
             bullet.Left = bulletLeft;
             bullet.Top = bulletTop;
@@ -34,9 +34,22 @@ namespace Ghost_Buster
             bulletTimer.Start();
         }
 
+        //bullet size matches direction
+        private int[] SetBulletSize()
+        {
+            int[] val = { 25, 5 };
+            if (dir == "up" || dir == "down")
+            {
+                val[0] = 5;
+                val[1] = 25;
+                return val;
+            }
+            return val;
+        }
+
+        //launches bullet in the direction character is facing
         private void BulletTimerEvent(object sender, EventArgs e)
         {
-            //launches bullet in the direction character is facing
             if (dir == "up")
             {
                 bullet.Top -= speed;
@@ -63,7 +76,6 @@ namespace Ghost_Buster
                 bullet = null;
                 bulletTimer = null;
             }
-
         }
     }
 }
