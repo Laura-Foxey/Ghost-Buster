@@ -69,13 +69,12 @@ namespace Ghost_Buster.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap dead {
+        internal static System.Drawing.Bitmap dead1 {
             get {
-                object obj = ResourceManager.GetObject("dead", resourceCulture);
+                object obj = ResourceManager.GetObject("dead1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +82,9 @@ namespace Ghost_Buster.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap down {
+        internal static System.Drawing.Bitmap down1 {
             get {
-                object obj = ResourceManager.GetObject("down", resourceCulture);
+                object obj = ResourceManager.GetObject("down1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +92,9 @@ namespace Ghost_Buster.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap left {
+        internal static System.Drawing.Bitmap image {
             get {
-                object obj = ResourceManager.GetObject("left", resourceCulture);
+                object obj = ResourceManager.GetObject("image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +102,9 @@ namespace Ghost_Buster.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap right {
+        internal static System.Drawing.Bitmap left1 {
             get {
-                object obj = ResourceManager.GetObject("right", resourceCulture);
+                object obj = ResourceManager.GetObject("left1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +112,31 @@ namespace Ghost_Buster.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap up {
+        internal static System.Drawing.Bitmap right1 {
             get {
-                object obj = ResourceManager.GetObject("up", resourceCulture);
+                object obj = ResourceManager.GetObject("right1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap up1 {
+            get {
+                object obj = ResourceManager.GetObject("up1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+      
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap zdown1 {
+            get {
+                object obj = ResourceManager.GetObject("zdown1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +144,9 @@ namespace Ghost_Buster.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap zdown {
+        internal static System.Drawing.Bitmap zleft1 {
             get {
-                object obj = ResourceManager.GetObject("zdown", resourceCulture);
+                object obj = ResourceManager.GetObject("zleft1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,9 +154,9 @@ namespace Ghost_Buster.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap zleft {
+        internal static System.Drawing.Bitmap zright1 {
             get {
-                object obj = ResourceManager.GetObject("zleft", resourceCulture);
+                object obj = ResourceManager.GetObject("zright1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -143,19 +164,9 @@ namespace Ghost_Buster.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap zright {
+        internal static System.Drawing.Bitmap zup1 {
             get {
-                object obj = ResourceManager.GetObject("zright", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap zup {
-            get {
-                object obj = ResourceManager.GetObject("zup", resourceCulture);
+                object obj = ResourceManager.GetObject("zup1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

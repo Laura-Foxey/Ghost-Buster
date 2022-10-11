@@ -43,7 +43,7 @@ namespace Ghost_Buster
             else
             {
                 gameOver = true;
-                player.Image = Properties.Resources.dead;
+                player.Image = Properties.Resources.dead1;
                 gameTimer.Stop();
             }
 
@@ -85,28 +85,47 @@ namespace Ghost_Buster
                     if (c.Left > player.Left)
                     {
                         c.Left -= enemySpeed;
-                        ((PictureBox)c).Image = Properties.Resources.zleft;  //change this
+                        ((PictureBox)c).Image = Properties.Resources.zleft1;  //change this
                     }
                     if (c.Left < player.Left)
                     {
                         c.Left += enemySpeed;
-                        ((PictureBox)c).Image = Properties.Resources.zright;  //change this
+                        ((PictureBox)c).Image = Properties.Resources.zright1;  //change this
                     }
                     if (c.Top > player.Top)
                     {
                         c.Top -= enemySpeed;
-                        ((PictureBox)c).Image = Properties.Resources.zup;  //change this
+                        ((PictureBox)c).Image = Properties.Resources.zup1;  //change this
                     }
                     if (c.Top < player.Top)
                     {
                         c.Top += enemySpeed;
-                        ((PictureBox)c).Image = Properties.Resources.zdown;  //change this
+                        ((PictureBox)c).Image = Properties.Resources.zdown1;  //change this
+                    }
+
+                    if (player.Bounds.IntersectsWith(c.Bounds))
+                    {
+                        playerHealth--;
+                    }
+                }
+
+                foreach (Control g in this.Controls)
+                {
+                    if (g is PictureBox && (string)g.Tag == "bullet" && c is PictureBox && (string)c.Tag == "ghost")
+                    {
+                        if (c.Bounds.IntersectsWith(g.Bounds))
+                        {
+                            kills++;
+                            this.Controls.Remove(g);
+                            this.Controls.Remove(c);
+                            ((PictureBox)g).Dispose();
+                            ((PictureBox)c).Dispose();
+                            enemyList.Remove(((PictureBox)c));
+                            SpawnEnemy();
+                        }
                     }
                 }
             }
-
-
-
         }
 
         private void KeyIsUp(object sender, KeyEventArgs e)
@@ -141,29 +160,36 @@ namespace Ghost_Buster
 
         private void KeyIsDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Up)
+            if (gameOver == false)
             {
-                goUp = true;
-                facing = "up";
-                player.Image = Properties.Resources.up;
+                if (e.KeyCode == Keys.Up)
+                {
+                    goUp = true;
+                    facing = "up";
+                    player.Image = Properties.Resources.up1;
+                }
+                if (e.KeyCode == Keys.Down)
+                {
+                    goDown = true;
+                    facing = "down";
+                    player.Image = Properties.Resources.down1;
+                }
+                if (e.KeyCode == Keys.Left)
+                {
+                    goLeft = true;
+                    facing = "left";
+                    player.Image = Properties.Resources.left1;
+                }
+                if (e.KeyCode == Keys.Right)
+                {
+                    goRight = true;
+                    facing = "right";
+                    player.Image = Properties.Resources.right1;
+                }
             }
-            if (e.KeyCode == Keys.Down)
+            if (e.KeyCode == Keys.Enter)
             {
-                goDown = true;
-                facing = "down";
-                player.Image = Properties.Resources.down;
-            }
-            if (e.KeyCode == Keys.Left)
-            {
-                goLeft = true;
-                facing = "left";
-                player.Image = Properties.Resources.left;
-            }
-            if (e.KeyCode == Keys.Right)
-            {
-                goRight = true;
-                facing = "right";
-                player.Image = Properties.Resources.right;
+                Reset();
             }
         }
 
@@ -171,9 +197,28 @@ namespace Ghost_Buster
         {
             Bullet shoot = new Bullet();
             shoot.dir = dir;
-            //bullet originates from the middle of the player
-            shoot.bulletLeft = player.Left + (player.Width / 2);
-            shoot.bulletTop = player.Top + (player.Height / 2);
+
+            //bullet originates from the barrel
+            if (dir == "down")
+            {
+                shoot.bulletLeft = player.Left + (player.Width / 2) - 30;
+                shoot.bulletTop = player.Top + (player.Height / 2);
+            }
+            if (dir == "up")
+            {
+                shoot.bulletLeft = player.Left + (player.Width / 2) + 30;
+                shoot.bulletTop = player.Top + (player.Height / 2);
+            }
+            if (dir == "right")
+            {
+                shoot.bulletLeft = player.Left + (player.Width / 2);
+                shoot.bulletTop = player.Top + (player.Height / 2) + 30;
+            }
+            if (dir == "left")
+            {
+                shoot.bulletLeft = player.Left + (player.Width / 2)
+                shoot.bulletTop = player.Top + (player.Height / 2) - 30;
+            }
 
             shoot.CreateBullet(this);
         }
@@ -182,7 +227,7 @@ namespace Ghost_Buster
         {
             PictureBox ghost = new PictureBox();
             ghost.Tag = "ghost";
-            ghost.Image = Properties.Resources.zdown;  //TODO: changethis
+            ghost.Image = Properties.Resources.zdown1;  //TODO: changethis
             ghost.Left = random.Next(0, 900);
             ghost.Top = random.Next(0, 800);
             ghost.SizeMode = PictureBoxSizeMode.AutoSize;
@@ -214,7 +259,7 @@ namespace Ghost_Buster
         //resets the game with default values
         private void Reset()
         {
-            player.Image = Properties.Resources.up;
+            player.Image = Properties.Resources.up1;
 
             foreach(PictureBox pic in enemyList)
             {
@@ -236,6 +281,7 @@ namespace Ghost_Buster
             ammo = 10;
             kills = 0;
 
+            gameOver = false;
             gameTimer.Start();
         }
     }

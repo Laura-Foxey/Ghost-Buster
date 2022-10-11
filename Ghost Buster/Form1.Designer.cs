@@ -85,7 +85,7 @@
             // 
             // player
             // 
-            this.player.Image = global::Ghost_Buster.Properties.Resources.up;
+            this.player.Image = global::Ghost_Buster.Properties.Resources.up1;
             this.player.Location = new System.Drawing.Point(328, 293);
             this.player.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.player.Name = "player";
