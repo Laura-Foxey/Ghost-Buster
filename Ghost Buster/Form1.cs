@@ -26,6 +26,7 @@ namespace Ghost_Buster
         public Form1()
         {
             InitializeComponent();
+            Reset();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -69,6 +70,7 @@ namespace Ghost_Buster
 
             foreach (Control c in this.Controls)
             {
+                //make player interact with ammo
                 if (c is PictureBox && (string)c.Tag == "ammo" )
                 {
                     if (player.Bounds.IntersectsWith(c.Bounds))
@@ -77,7 +79,34 @@ namespace Ghost_Buster
                         c.Dispose();
                     }
                 }
+                //make ghosts go towards player && change the picture to match direction
+                if (c is PictureBox && (string)c.Tag == "ghost")
+                {
+                    if (c.Left > player.Left)
+                    {
+                        c.Left -= enemySpeed;
+                        ((PictureBox)c).Image = Properties.Resources.zleft;  //change this
+                    }
+                    if (c.Left < player.Left)
+                    {
+                        c.Left += enemySpeed;
+                        ((PictureBox)c).Image = Properties.Resources.zright;  //change this
+                    }
+                    if (c.Top > player.Top)
+                    {
+                        c.Top -= enemySpeed;
+                        ((PictureBox)c).Image = Properties.Resources.zup;  //change this
+                    }
+                    if (c.Top < player.Top)
+                    {
+                        c.Top += enemySpeed;
+                        ((PictureBox)c).Image = Properties.Resources.zdown;  //change this
+                    }
+                }
             }
+
+
+
         }
 
         private void KeyIsUp(object sender, KeyEventArgs e)
@@ -182,9 +211,32 @@ namespace Ghost_Buster
 
         }
 
+        //resets the game with default values
         private void Reset()
         {
+            player.Image = Properties.Resources.up;
 
+            foreach(PictureBox pic in enemyList)
+            {
+                this.Controls.Remove(pic);
+            }
+
+            enemyList.Clear();
+
+            for (int i = 0; i < 3; i++)
+            {
+                SpawnEnemy();
+            }
+
+            goUp = false;
+            goDown = false;
+            goLeft = false;
+            goRight = false;
+            playerHealth = 100;
+            ammo = 10;
+            kills = 0;
+
+            gameTimer.Start();
         }
     }
 }
