@@ -66,7 +66,7 @@
             // 
             this.txtHP.AutoSize = true;
             this.txtHP.Font = new System.Drawing.Font("SimSun-ExtB", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtHP.Location = new System.Drawing.Point(641, 11);
+            this.txtHP.Location = new System.Drawing.Point(602, 9);
             this.txtHP.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.txtHP.Name = "txtHP";
             this.txtHP.Size = new System.Drawing.Size(49, 24);
@@ -76,20 +76,21 @@
             // 
             // HPBar
             // 
-            this.HPBar.Location = new System.Drawing.Point(705, 6);
-            this.HPBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.HPBar.Location = new System.Drawing.Point(700, 9);
+            this.HPBar.Margin = new System.Windows.Forms.Padding(4);
             this.HPBar.Name = "HPBar";
             this.HPBar.Size = new System.Drawing.Size(236, 28);
             this.HPBar.TabIndex = 1;
             this.HPBar.Value = 100;
+            this.HPBar.Click += new System.EventHandler(this.HPBar_Click);
             // 
             // player
             // 
             this.player.Image = global::Ghost_Buster.Properties.Resources.up1;
             this.player.Location = new System.Drawing.Point(328, 293);
-            this.player.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.player.Margin = new System.Windows.Forms.Padding(4);
             this.player.Name = "player";
-            this.player.Size = new System.Drawing.Size(71, 100);
+            this.player.Size = new System.Drawing.Size(100, 100);
             this.player.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.player.TabIndex = 2;
             this.player.TabStop = false;
@@ -105,13 +106,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.ClientSize = new System.Drawing.Size(922, 753);
+            this.ClientSize = new System.Drawing.Size(986, 769);
             this.Controls.Add(this.player);
             this.Controls.Add(this.HPBar);
             this.Controls.Add(this.txtHP);
             this.Controls.Add(this.txtKills);
             this.Controls.Add(this.txtAmmo);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Ghost Buster";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyIsDown);

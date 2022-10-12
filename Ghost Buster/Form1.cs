@@ -14,10 +14,10 @@ namespace Ghost_Buster
     {
         bool goUp, goDown, goLeft, goRight, gameOver = false;
         string facing = "up";
-        int playerHealth = 100;
+        double playerHealth = 100;
         int speed = 10;
         int ammo = 10;
-        int enemySpeed = 2;
+        int enemySpeed = 1;
         int kills = 0;
         Random random = new Random();
 
@@ -38,13 +38,15 @@ namespace Ghost_Buster
         {
             if (playerHealth > 0)
             {
-                HPBar.Value = playerHealth;
+                HPBar.Value = (int)playerHealth;
+                txtHP.Text = "HP: " + playerHealth;
             }
             else
             {
                 gameOver = true;
                 player.Image = Properties.Resources.dead1;
                 gameTimer.Stop();
+                txtHP.Text = "HP: 0";
             }
 
             txtAmmo.Text = "Ammo: " + ammo;
@@ -80,8 +82,12 @@ namespace Ghost_Buster
                     }
                 }
                 //make ghosts go towards player && change the picture to match direction
+                //increase ghost speed based on kills
                 if (c is PictureBox && (string)c.Tag == "ghost")
                 {
+                    if (kills > 15 ) { enemySpeed = 2; }
+                    else if (kills > 30) {  enemySpeed = 3; }
+           
                     if (c.Left > player.Left)
                     {
                         c.Left -= enemySpeed;
@@ -103,13 +109,14 @@ namespace Ghost_Buster
                         ((PictureBox)c).Image = Properties.Resources.zdown1;  //change this
                     }
 
+                    //decrease player health when they are intersecting with the ghosts
                     if (player.Bounds.IntersectsWith(c.Bounds))
                     {
-                        playerHealth--;
+                        playerHealth -= 0.3;
                     }
                 }
 
-
+                //removes ghost and bullet icon on collision
                 foreach (Control g in this.Controls)
                 {
                     if (g is PictureBox && (string)g.Tag == "bullet" && c is PictureBox && (string)c.Tag == "ghost")
@@ -194,6 +201,11 @@ namespace Ghost_Buster
             }
         }
 
+        private void HPBar_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void Shoot(string dir)
         {
             Bullet shoot = new Bullet();
@@ -244,7 +256,7 @@ namespace Ghost_Buster
         {
             PictureBox ammo = new PictureBox();
             ammo.Tag = "ammo";
-            ammo.Image = Properties.Resources.ammo_Image; //TODO: changethis
+            ammo.Image = Properties.Resources.ammo_Image;
             ammo.SizeMode = PictureBoxSizeMode.AutoSize;
             ammo.Left = random.Next(10, ClientSize.Width - ammo.Width);
             ammo.Top = random.Next(10, ClientSize.Height - ammo.Height);
@@ -275,6 +287,7 @@ namespace Ghost_Buster
                 SpawnEnemy();
             }
 
+            enemySpeed = 2;
             goUp = false;
             goDown = false;
             goLeft = false;
