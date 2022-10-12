@@ -109,6 +109,7 @@ namespace Ghost_Buster
                     }
                 }
 
+
                 foreach (Control g in this.Controls)
                 {
                     if (g is PictureBox && (string)g.Tag == "bullet" && c is PictureBox && (string)c.Tag == "ghost")
@@ -147,7 +148,7 @@ namespace Ghost_Buster
                 goRight = false;
             }
 
-            if (e.KeyCode == Keys.Space && ammo > 0)
+            if (e.KeyCode == Keys.Space && ammo > 0 && gameOver == false)
             {
                 ammo--;
                 Shoot(facing);
@@ -187,7 +188,7 @@ namespace Ghost_Buster
                     player.Image = Properties.Resources.right1;
                 }
             }
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Space && gameOver == true)
             {
                 Reset();
             }
@@ -266,6 +267,7 @@ namespace Ghost_Buster
                 this.Controls.Remove(pic);
             }
 
+            //clears current enemies and spawn 
             enemyList.Clear();
 
             for (int i = 0; i < 3; i++)

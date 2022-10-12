@@ -21,6 +21,7 @@ namespace Ghost_Buster
         {
             bullet.BackColor = Color.White;
             bullet.Size = new Size(SetBulletSize()[0], SetBulletSize()[1]);
+            bullet.BackColor = Color.FromArgb(255, 255, 0);
             bullet.Tag = "bullet";
             bullet.Left = bulletLeft;
             bullet.Top = bulletTop;
