@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace Ghost_Buster
 {
@@ -20,6 +21,7 @@ namespace Ghost_Buster
         int enemySpeed = 1;
         int kills = 0;
         Random random = new Random();
+        int[] enemySpawnArr = Enumerable.Range(1, 15).Select(x => x * 15).ToArray();
 
         List<PictureBox> enemyList = new List<PictureBox>();
 
@@ -36,6 +38,7 @@ namespace Ghost_Buster
 
         private void MainTimerEvent(object sender, EventArgs e)
         {
+            Console.WriteLine(random);
             if (playerHealth > 0)
             {
                 HPBar.Value = (int)playerHealth;
@@ -81,6 +84,16 @@ namespace Ghost_Buster
                         c.Dispose();
                     }
                 }
+
+                if (c is PictureBox && (string)c.Tag == "health")
+                {
+                    if (player.Bounds.IntersectsWith(c.Bounds))
+                    {
+                        playerHealth += 10;
+                        c.Dispose();
+                    }
+                }
+
                 //make ghosts go towards player && change the picture to match direction
                 //increase ghost speed based on kills
                 if (c is PictureBox && (string)c.Tag == "ghost")
@@ -91,22 +104,22 @@ namespace Ghost_Buster
                     if (c.Left > player.Left)
                     {
                         c.Left -= enemySpeed;
-                        ((PictureBox)c).Image = Properties.Resources.zleft1;  //change this
+                        ((PictureBox)c).Image = Properties.Resources.zleft1;
                     }
                     if (c.Left < player.Left)
                     {
                         c.Left += enemySpeed;
-                        ((PictureBox)c).Image = Properties.Resources.zright1;  //change this
+                        ((PictureBox)c).Image = Properties.Resources.zright1;  
                     }
                     if (c.Top > player.Top)
                     {
                         c.Top -= enemySpeed;
-                        ((PictureBox)c).Image = Properties.Resources.zup1;  //change this
+                        ((PictureBox)c).Image = Properties.Resources.zup1;  
                     }
                     if (c.Top < player.Top)
                     {
                         c.Top += enemySpeed;
-                        ((PictureBox)c).Image = Properties.Resources.zdown1;  //change this
+                        ((PictureBox)c).Image = Properties.Resources.zdown1;  
                     }
 
                     //decrease player health when they are intersecting with the ghosts
@@ -116,10 +129,42 @@ namespace Ghost_Buster
                     }
                 }
 
+                //same as top but different type of enemy
+                if (c is PictureBox && (string)c.Tag == "redGhost")
+                {
+                    enemySpeed = 3;
+                    if (c.Left > player.Left)
+                    {
+                        c.Left -= enemySpeed;
+                        ((PictureBox)c).Image = Properties.Resources.z2left;
+                    }
+                    if (c.Left < player.Left)
+                    {
+                        c.Left += enemySpeed;
+                        ((PictureBox)c).Image = Properties.Resources.z2right;
+                    }
+                    if (c.Top > player.Top)
+                    {
+                        c.Top -= enemySpeed;
+                        ((PictureBox)c).Image = Properties.Resources.z2up;
+                    }
+                    if (c.Top < player.Top)
+                    {
+                        c.Top += enemySpeed;
+                        ((PictureBox)c).Image = Properties.Resources.z2down;
+                    }
+
+                    //decrease player health when they are intersecting with the ghosts
+                    if (player.Bounds.IntersectsWith(c.Bounds))
+                    {
+                        playerHealth -= 0.5;
+                    }
+                }
+
                 //removes ghost and bullet icon on collision
                 foreach (Control g in this.Controls)
                 {
-                    if (g is PictureBox && (string)g.Tag == "bullet" && c is PictureBox && (string)c.Tag == "ghost")
+                    if (g is PictureBox && (string)g.Tag == "bullet" && c is PictureBox && ((string)c.Tag == "ghost" || (string)c.Tag == "redGhost"))
                     {
                         if (c.Bounds.IntersectsWith(g.Bounds))
                         {
@@ -129,6 +174,11 @@ namespace Ghost_Buster
                             ((PictureBox)g).Dispose();
                             ((PictureBox)c).Dispose();
                             enemyList.Remove(((PictureBox)c));
+                            if (enemySpawnArr.Contains(kills))
+                            {
+                                SpawnHarderEnemy();
+                            }
+                            else 
                             SpawnEnemy();
                         }
                     }
@@ -252,6 +302,30 @@ namespace Ghost_Buster
             player.BringToFront();
         }
 
+        //spawns health every 10 seconds if the odds are with you :)
+        private void HealthTimerEvent(object sender, EventArgs e)
+        {
+            int randomNum = random.Next(1, 100);
+            if (randomNum % 2 == 0)
+            { SpawnHealth(); }
+        }
+
+        private void SpawnHarderEnemy()
+        {
+            PictureBox redGhost = new PictureBox();
+            redGhost.Tag = "redGhost";
+            redGhost.Image = Properties.Resources.z2down;  //TODO: changethis
+            redGhost.Left = random.Next(0, 900);
+            redGhost.Top = random.Next(0, 800);
+            redGhost.SizeMode = PictureBoxSizeMode.AutoSize;
+            enemyList.Add(redGhost);
+
+            this.Controls.Add(redGhost);
+
+            //makes sure the player img does not get overlapped 
+            player.BringToFront();
+        }
+
         private void SpawnAmmo()
         {
             PictureBox ammo = new PictureBox();
@@ -266,7 +340,22 @@ namespace Ghost_Buster
             //makes sure the ammo and player img does not get overlapped 
             ammo.BringToFront();
             player.BringToFront();
+        }
 
+        private void SpawnHealth()
+        {
+            PictureBox health = new PictureBox();
+            health.Tag = "health";
+            health.Image = Properties.Resources.health_Image;
+            health.SizeMode = PictureBoxSizeMode.AutoSize;
+            health.Left = random.Next(10, ClientSize.Width - health.Width);
+            health.Top = random.Next(10, ClientSize.Height - health.Height);
+
+            this.Controls.Add(health);
+
+            //makes sure the ammo and player img does not get overlapped 
+            health.BringToFront();
+            player.BringToFront();
         }
 
         //resets the game with default values

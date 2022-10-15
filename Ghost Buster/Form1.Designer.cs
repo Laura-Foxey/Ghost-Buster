@@ -33,8 +33,9 @@
             this.txtKills = new System.Windows.Forms.Label();
             this.txtHP = new System.Windows.Forms.Label();
             this.HPBar = new System.Windows.Forms.ProgressBar();
-            this.player = new System.Windows.Forms.PictureBox();
             this.gameTimer = new System.Windows.Forms.Timer(this.components);
+            this.player = new System.Windows.Forms.PictureBox();
+            this.healthTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.player)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,6 +85,12 @@
             this.HPBar.Value = 100;
             this.HPBar.Click += new System.EventHandler(this.HPBar_Click);
             // 
+            // gameTimer
+            // 
+            this.gameTimer.Enabled = true;
+            this.gameTimer.Interval = 20;
+            this.gameTimer.Tick += new System.EventHandler(this.MainTimerEvent);
+            // 
             // player
             // 
             this.player.Image = global::Ghost_Buster.Properties.Resources.up1;
@@ -95,11 +102,11 @@
             this.player.TabIndex = 2;
             this.player.TabStop = false;
             // 
-            // gameTimer
+            // healthTimer
             // 
-            this.gameTimer.Enabled = true;
-            this.gameTimer.Interval = 20;
-            this.gameTimer.Tick += new System.EventHandler(this.MainTimerEvent);
+            this.healthTimer.Enabled = true;
+            this.healthTimer.Interval = 10000;
+            this.healthTimer.Tick += new System.EventHandler(this.HealthTimerEvent);
             // 
             // Form1
             // 
@@ -131,6 +138,7 @@
         private System.Windows.Forms.ProgressBar HPBar;
         private System.Windows.Forms.PictureBox player;
         private System.Windows.Forms.Timer gameTimer;
+        private System.Windows.Forms.Timer healthTimer;
     }
 }
 

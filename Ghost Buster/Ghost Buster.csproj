@@ -111,5 +111,20 @@
   <ItemGroup>
     <None Include="Resources\image.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\z2down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\z2left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\z2right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\z2up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\health-Image.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
