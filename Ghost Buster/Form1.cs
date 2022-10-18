@@ -21,7 +21,11 @@ namespace Ghost_Buster
         int enemySpeed = 1;
         int kills = 0;
         Random random = new Random();
-        int[] enemySpawnArr = Enumerable.Range(1, 15).Select(x => x * 15).ToArray();
+        static int[] enemySpawnArray1 = { 15, 30, 45, 60, 75, 90 };
+        static int[] enemySpawnArray2 = { 90, 100, 110, 120, 130, 140};
+        static int[] enemySpawnArray3 = Enumerable.Range(30, 50).Select(x => x * 5).ToArray();
+
+        int[] enemySpawnArr = enemySpawnArray1.Concat(enemySpawnArray2).Concat(enemySpawnArray3).ToArray();
 
         List<PictureBox> enemyList = new List<PictureBox>();
 
@@ -38,7 +42,11 @@ namespace Ghost_Buster
 
         private void MainTimerEvent(object sender, EventArgs e)
         {
-            Console.WriteLine(random);
+            foreach (int x in enemySpawnArr)
+            {
+                Console.WriteLine(x);
+            }
+
             if (playerHealth > 0)
             {
                 HPBar.Value = (int)playerHealth;
